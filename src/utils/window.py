@@ -17,16 +17,7 @@ class Window:
 
 
     def main_loop(self):
-        #setBackgroudColor
-        glClearColor(0, 0.1, 0.1, 1)
-        glViewport(0, 0, 800, 600)
-        glMatrixMode(GL_PROJECTION)
-        glLoadIdentity()
-        gluOrtho2D(0, 800, 0, 600)  # 0,0 canto inferior esquerdo
-        glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
-
-        glPointSize(1) 
+        self.render_config()
 
         while not glfw.window_should_close(self._window):
             glfw.poll_events()
@@ -36,6 +27,9 @@ class Window:
             glfw.swap_buffers(self._window)
 
         glfw.terminate()
+
+    def set_render_config(self, func):
+        self.render_config = func
 
     def render(self, func):
         self.func = func

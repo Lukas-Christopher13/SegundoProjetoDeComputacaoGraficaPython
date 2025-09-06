@@ -6,7 +6,7 @@ from pyopengltk import OpenGLFrame
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from teste2 import Point, drowLine
+from trash.teste2 import Point, drowLine
 
 WIDTH = 800
 HEIGHT = 600

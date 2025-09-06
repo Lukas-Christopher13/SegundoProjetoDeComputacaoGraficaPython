@@ -1,7 +1,3 @@
-from OpenGL.GL import *
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
-
 def drowLine(start, end) -> list:
     if abs(end.x - start.x) > abs(end.y - start.y): 
         return drowLineH(start, end)

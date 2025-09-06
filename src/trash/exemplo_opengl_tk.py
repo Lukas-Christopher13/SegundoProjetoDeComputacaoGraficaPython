@@ -6,8 +6,8 @@ from pyopengltk import OpenGLFrame
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from algoritimo import drowLine
-from point import Point
+from algorithms.PontoMedioDDA import drowLine
+from utils.point import Point
 
 
 WIDTH = 800
