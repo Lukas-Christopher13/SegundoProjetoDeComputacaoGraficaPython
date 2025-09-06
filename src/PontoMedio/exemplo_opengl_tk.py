@@ -1,5 +1,4 @@
 import os
-import time
 os.environ['PYOPENGL_PLATFORM'] = 'glx'
 
 from tkinter import *
@@ -7,7 +6,9 @@ from pyopengltk import OpenGLFrame
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from teste2 import Point, drowLine
+from algoritimo import drowLine
+from point import Point
+
 
 WIDTH = 800
 HEIGHT = 600
@@ -19,9 +20,8 @@ Y_MAX = 1000.0
 
 
 class MyOpenGLFrame(OpenGLFrame):
-    start = Point(x=0, y=0)
-    end = Point(x=0, y=0)
-    ready = False
+    start = Point()
+    end = Point()
 
     def initgl(self):
         glClearColor(0.2, 0.3, 0.4, 1.0)
@@ -29,7 +29,7 @@ class MyOpenGLFrame(OpenGLFrame):
         # ===== Projeção ortográfica para coordenadas de dispositivo =====
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        gluOrtho2D(0, self.width, 0, self.height)  # 0,0 canto inferior esquerdo
+        gluOrtho2D(0, WIDTH, 0, HEIGHT)  # 0,0 canto inferior esquerdo
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
 
@@ -39,6 +39,15 @@ class MyOpenGLFrame(OpenGLFrame):
         
         drowLine(self.start, self.end)
 
+    def reshape(self, width, height):
+        glViewport(0, 0, width, height)  # cobre todo o widget
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        gluOrtho2D(0, width, 0, height)
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+
+
     def atualiza(self, start, end):
         self.start = start
         self.end = end
@@ -47,8 +56,8 @@ def main() :
     root = Tk()
     root.title("Tkinter + OpenGL")
 
-    opengl_frame = MyOpenGLFrame(root, width=WIDTH, height=HEIGHT)
-    opengl_frame.pack(side=RIGHT, expand=True, fill=BOTH)
+    opengl_frame = MyOpenGLFrame(root, width=WIDTH, height=HEIGHT, bd=0, highlightthickness=0)
+    opengl_frame.pack(side=RIGHT, expand=True, fill=BOTH, padx=0, pady=0)
 
     side_frame = Frame(root)
     side_frame.pack(side=LEFT, fill=Y, padx=10, pady=10)  
