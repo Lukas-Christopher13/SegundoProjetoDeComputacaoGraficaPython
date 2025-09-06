@@ -5,7 +5,7 @@ from OpenGL.GLU import *
 
 from utils.point import Point
 from utils.window import Window
-from algorithms.PontoMedioDDA import drowLine
+from algorithms.PontoMedio import drowLine
 
 
 WIDHT = 800

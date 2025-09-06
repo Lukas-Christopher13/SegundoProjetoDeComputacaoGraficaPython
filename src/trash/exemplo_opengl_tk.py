@@ -6,7 +6,7 @@ from pyopengltk import OpenGLFrame
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from algorithms.PontoMedioDDA import drowLine
+from algorithms.PontoMedio import drowLine
 from utils.point import Point
 
 

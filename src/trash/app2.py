@@ -2,7 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from utils.windowtk import WindowTk
-from algorithms.PontoMedioDDA import drowLine
+from algorithms.PontoMedio import drowLine
 from utils.point import Point
 from tkinter import *
 from pprint import pprint
