@@ -1,3 +1,5 @@
+import math
+import numpy as np
 from pprint import pprint
 from typing import Self, List
 
@@ -23,6 +25,21 @@ class CGMatriz:
 
         return CGMatriz(m_result)
     
+    def rotate(self, angle: int):
+        angle = -math.radians(angle)
+
+        rotate_operator = CGMatriz([
+            [math.cos(angle), - math.sin(angle), 0],
+            [math.sin(angle),   math.cos(angle), 0], 
+            [      0,                 0,         1]
+        ])
+
+        result = self * rotate_operator 
+        self.matriz = result.matriz
+
+        return self
+        
+
     def __str__(self):
         str_result = ""
         for i in range(self.m):
