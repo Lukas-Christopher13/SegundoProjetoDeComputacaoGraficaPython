@@ -1,3 +1,4 @@
+# arquivo: shear_y_square.py
 import os
 os.environ['PYOPENGL_PLATFORM'] = 'windows'
 
@@ -16,12 +17,12 @@ HEIGHT = 600
 def render_config_func():
     glClearColor(1, 1, 1, 1)
 
-# Função para cisalhamento em X
-def shear_x(vertices: CGMatriz, sh_x: float):
+# Função de cisalhamento em Y
+def shear_y(vertices: CGMatriz, sh_y: float):
     shear_matrix = np.array([
-        [1, sh_x, 0],
-        [0, 1,    0],
-        [0, 0,    1]
+        [1,    0, 0],
+        [sh_y, 1, 0],
+        [0,    0, 1]
     ])
     matriz_np = np.array(vertices.matriz).T
     resultado = np.dot(shear_matrix, matriz_np).T
@@ -30,7 +31,6 @@ def shear_x(vertices: CGMatriz, sh_x: float):
 
 def main():
     global square
-    # Quadrado
     square = CGMatriz([
         [0.0, 0.0, 1],
         [0.4, 0.0, 1],
@@ -38,30 +38,30 @@ def main():
         [0.0, 0.4, 1]
     ])
 
-    sh_x_factor = 0.0
+    sh_y_factor = 0.0
 
     def render_func():
         drowCartesianPlane()
 
-        # Quadrado original em azul
+        # Quadrado original azul
         glColor(0, 0, 1)
         glBegin(GL_QUADS)
         for v in square.matriz:
             glVertex3fv(v)
         glEnd()
 
-        # Quadrado cisalhado em X em verde
-        if sh_x_factor != 0:
-            glColor(0, 1, 0)
+        # Quadrado cisalhado em Y vermelho
+        if sh_y_factor != 0:
+            glColor(1, 0, 0)
             glBegin(GL_QUADS)
             temp = CGMatriz([row.copy() for row in square.matriz])
-            shear_x(temp, sh_x_factor)
+            shear_y(temp, sh_y_factor)
             for v in temp.matriz:
                 glVertex3fv(v)
             glEnd()
 
     root = Tk()
-    root.title("Tkinter + OpenGL: Cisalhamento X - Quadrado")
+    root.title("Tkinter + OpenGL: Cisalhamento Y - Quadrado")
 
     window = WindowTk(root, width=WIDTH, height=HEIGHT, bd=0, highlightthickness=0)
     window.pack(side=RIGHT, expand=True, fill=BOTH, padx=0, pady=0)
@@ -69,19 +69,20 @@ def main():
     side_frame = Frame(root)
     side_frame.pack(side=LEFT, fill=Y, padx=10, pady=10)
 
-    Label(side_frame, text="Shear X").grid(row=0, column=0, pady=5)
-    shear_entry = Entry(side_frame, width=20)
-    shear_entry.insert(0, "0.0")
-    shear_entry.grid(row=0, column=1, pady=5)
+    Label(side_frame, text="Shear Y").grid(row=0, column=0, pady=5)
+    shear_y_entry = Entry(side_frame, width=20)
+    shear_y_entry.insert(0, "0.0")
+    shear_y_entry.grid(row=0, column=1, pady=5)
 
-    def aplicar_shear():
-        nonlocal sh_x_factor
+    def aplicar_shear_y():
+        nonlocal sh_y_factor
         try:
-            sh_x_factor = float(shear_entry.get()) / 10.0  # suaviza o efeito
+            # Divide por 10 para suavizar o efeito
+            sh_y_factor = float(shear_y_entry.get()) / 10.0
         except ValueError:
             print("Valor inválido")
 
-    btn_aplicar = Button(side_frame, text="Aplicar", command=aplicar_shear)
+    btn_aplicar = Button(side_frame, text="Aplicar", command=aplicar_shear_y)
     btn_aplicar.grid(row=1, column=0, columnspan=2, pady=10)
 
     window.set_init_config(render_config_func)
