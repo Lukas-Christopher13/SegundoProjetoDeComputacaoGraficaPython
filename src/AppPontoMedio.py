@@ -1,8 +1,6 @@
 import os
 os.environ['PYOPENGL_PLATFORM'] = 'glx'
 
-from pprint import pprint
-
 from tkinter import * 
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -32,9 +30,6 @@ def main():
 
     def render_func():
         glClear(GL_COLOR_BUFFER_BIT)
-        glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
-         
 
         glColor3f(1, 0, 0)
         glBegin(GL_POINTS)
