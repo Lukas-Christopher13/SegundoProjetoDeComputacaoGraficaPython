@@ -1,14 +1,11 @@
 import os
 os.environ['PYOPENGL_PLATFORM'] = 'glx'
 
-from pprint import pprint
-
 from tkinter import * 
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from utils.windowtk import WindowTk
-from utils.window import Window
 from utils.cg_matriz import CGMatriz
 from utils.glutils import drowCartesianPlane
 
@@ -37,7 +34,7 @@ def main():
         glEnd()
 
     root = Tk()
-    root.title("Tkinter + OpenGL")
+    root.title("Rotação")
 
     window = WindowTk(root, width=WIDTH, height=HEIGHT, bd=0, highlightthickness=0)
     window.pack(side=RIGHT, expand=True, fill=BOTH, padx=0, pady=0)
