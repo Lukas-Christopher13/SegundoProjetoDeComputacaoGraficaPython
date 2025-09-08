@@ -9,6 +9,7 @@ from OpenGL.GLU import *
 
 from utils.point import Point
 from utils.windowtk import WindowTk
+from tk_widgets.scrollabe_show_result import scrolable_show_result
 from algorithms.PontoMedio import drowLine
 
 
@@ -78,8 +79,11 @@ def main():
         
         globals()["vertices"] = drowLine(start, end)
 
+        scrolable_show_result(side_frame, list=vertices)
+
     btn_aplicar = Button(side_frame, text="Aplicar", command=drow)
     btn_aplicar.grid(row=5, column=0, columnspan=2, pady=10)
+
 
     window.set_init_config(render_config_func)
     window.set_render_config(render_func)
