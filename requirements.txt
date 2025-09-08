@@ -1,5 +1,5 @@
 glfw==2.9.0
-numpy==2.3.2
+numpy==2.2.6
 pyglet==2.1.8
 PyOpenGL==3.1.10
 PyOpenGL-accelerate==3.1.10

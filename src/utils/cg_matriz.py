@@ -38,8 +38,20 @@ class CGMatriz:
         self.matriz = result.matriz
 
         return self
+    
+    def shear_x(self, sh_x: float):
+       
+        shear_operator = CGMatriz([
+            [1, sh_x, 0],
+            [0,  1,   0],
+            [0,  0,   1]
+        ])
         
+        result = self * shear_operator
+        self.matriz = result.matriz
+        return self
 
+    
     def __str__(self):
         str_result = ""
         for i in range(self.m):
